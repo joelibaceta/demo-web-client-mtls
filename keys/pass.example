@@ -1,0 +1,7 @@
+# Archivo de ejemplo para passwords de keystores
+# IMPORTANTE: NO SUBIR ESTE ARCHIVO A GITHUB CON VALORES REALES
+# Copiar como 'pass' y llenar con las contraseñas reales
+
+dev=tu-password-dev-aqui
+qa=tu-password-qa-aqui
+prod=tu-password-prod-aqui

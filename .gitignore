@@ -33,3 +33,16 @@ build/
 
 ### Mac ###
 .DS_Store
+
+### Keystores, certificados y archivos sensibles ###
+# Keystores JKS y PKCS12
+keys/*.jks
+keys/*.p12
+
+# Certificados y claves privadas
+keys/*.pem
+keys/*.key
+
+# Archivos de passwords y variables de entorno
+keys/pass
+.env
