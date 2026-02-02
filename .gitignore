@@ -46,3 +46,7 @@ keys/*.key
 # Archivos de passwords y variables de entorno
 keys/pass
 .env
+
+# Archivos de logs que pueden contener información sensible
+*.log
+output.log

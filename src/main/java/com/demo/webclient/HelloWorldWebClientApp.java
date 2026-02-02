@@ -1,7 +1,10 @@
 package com.demo.webclient;
 
+import com.demo.webclient.model.LoginResponse;
+import com.demo.webclient.service.LoginService;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -78,10 +81,11 @@ public class HelloWorldWebClientApp {
     }
 
     @Bean
-    public CommandLineRunner run(WebClient webClient) {
+    public CommandLineRunner run(WebClient webClient, @Autowired LoginService loginService) {
         return args -> {
-            System.out.println("\n=== Hello World con WebClient y mTLS ===\n");
+            System.out.println("\n=== Demo WebClient con mTLS ===\n");
             
+            // Prueba 1: Hello World
             try {
                 System.out.println("Conectando a: " + apiBaseUrl);
                 System.out.println("Haciendo petición GET con mTLS...\n");
@@ -99,6 +103,23 @@ public class HelloWorldWebClientApp {
                 
             } catch (Exception e) {
                 System.err.println("Error al conectar con mTLS:");
+                System.err.println(e.getMessage());
+                e.printStackTrace();
+            }
+
+            // Prueba 2: Login y generación de token
+            try {
+                LoginResponse loginResponse = loginService.login().block();
+                
+                if (loginResponse != null && loginResponse.isSuccess()) {
+                    System.out.println("\n=== Token de autenticación obtenido ===\n");
+                    // Aquí podrías usar el token para hacer más peticiones
+                } else {
+                    System.err.println("\n=== Error al obtener token ===\n");
+                }
+                
+            } catch (Exception e) {
+                System.err.println("Error en proceso de login:");
                 System.err.println(e.getMessage());
                 e.printStackTrace();
             }
